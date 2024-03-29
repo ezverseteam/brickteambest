@@ -2,19 +2,24 @@
 const cvs = document.getElementById("breakout");
 const ctx = cvs.getContext("2d");
 
-// Responsive canvas size
-function resizeCanvas() {
-    cvs.width = window.innerWidth > 800 ? 400 : window.innerWidth - 20;
-    cvs.height = cvs.width * 1.25;
-    paddle.width = cvs.width / 5;
-    paddle.x = cvs.width / 2 - paddle.width / 2;
-    ball.x = cvs.width / 2;
-    ball.y = paddle.y - BALL_RADIUS;
-    createBricks();
-}
+// // Responsive canvas size
+// function resizeCanvas() {
+//     cvs.width = window.innerWidth > 800 ? 400 : window.innerWidth - 20;
+//     cvs.height = cvs.width * 1.25;
+//     paddle.width = cvs.width / 5;
+//     paddle.x = cvs.width / 2 - paddle.width / 2;
+//     ball.x = cvs.width / 2;
+//     ball.y = paddle.y - BALL_RADIUS;
+//     createBricks();
+// }
 
-window.addEventListener('resize', resizeCanvas, false);
-window.addEventListener('DOMContentLoaded', resizeCanvas, false);
+// window.addEventListener('resize', resizeCanvas, false);
+// window.addEventListener('DOMContentLoaded', resizeCanvas, false);
+
+// Fixed canvas size, no need for dynamic resizing
+const canvasWidth = 300;
+const canvasHeight = 600;
+
 
 // ADD BORDER TO CANVAS
 cvs.style.border = "1px solid #0ff";
@@ -23,10 +28,10 @@ cvs.style.border = "1px solid #0ff";
 ctx.lineWidth = 3;
 
 // GAME VARIABLES AND CONSTANTS
-const PADDLE_WIDTH = 100;
-const PADDLE_MARGIN_BOTTOM = 50;
-const PADDLE_HEIGHT = 20;
-const BALL_RADIUS = 8;
+const PADDLE_WIDTH = 50;
+const PADDLE_MARGIN_BOTTOM = 40;
+const PADDLE_HEIGHT = 10;
+const BALL_RADIUS = 6;
 let LIFE = 3; // PLAYER HAS 3 LIVES
 let SCORE = 0;
 const SCORE_UNIT = 10;
@@ -149,7 +154,7 @@ const ball = {
     x : cvs.width/2,
     y : paddle.y - BALL_RADIUS,
     radius : BALL_RADIUS,
-    speed : 4,
+    speed : 6,
     dx : 3 * (Math.random() * 2 - 1),
     dy : -3
 }
@@ -178,17 +183,17 @@ function moveBall(){
 function ballWallCollision(){
     if(ball.x + ball.radius > cvs.width || ball.x - ball.radius < 0){
         ball.dx = - ball.dx;
-        WALL_HIT.play();
+       // WALL_HIT.play();
     }
     
     if(ball.y - ball.radius < 0){
         ball.dy = -ball.dy;
-        WALL_HIT.play();
+        //WALL_HIT.play();
     }
     
     if(ball.y + ball.radius > cvs.height){
         LIFE--; // LOSE LIFE
-        LIFE_LOST.play();
+      //  LIFE_LOST.play();
         resetBall();
     }
 }
@@ -226,11 +231,11 @@ function ballPaddleCollision(){
 // CREATE THE BRICKS
 const brick = {
     row : 1,
-    column : 5,
-    width : 55,
-    height : 20,
-    offSetLeft : 20,
-    offSetTop : 20,
+    column : 7,
+    width : 30,
+    height : 10,
+    offSetLeft : 10,
+    offSetTop : 10,
     marginTop : 40,
     fillColor : "#2e3548",
     strokeColor : "#FFF"
@@ -278,7 +283,7 @@ function ballBrickCollision(){
             // if the brick isn't broken
             if(b.status){
                 if(ball.x + ball.radius > b.x && ball.x - ball.radius < b.x + brick.width && ball.y + ball.radius > b.y && ball.y - ball.radius < b.y + brick.height){
-                    BRICK_HIT.play();
+                  // BRICK_HIT.play();
                     ball.dy = - ball.dy;
                     b.status = false; // the brick is broken
                     SCORE += SCORE_UNIT;
@@ -335,7 +340,7 @@ function levelUp(){
     }
     
     if(isLevelDone){
-        WIN.play();
+      //  WIN.play();
         
         if(LEVEL >= MAX_LEVEL){
             showYouWin();
@@ -344,7 +349,7 @@ function levelUp(){
         }
         brick.row++;
         createBricks();
-        ball.speed += 0.5;
+        ball.speed += 1;
         resetBall();
         LEVEL++;
     }
