@@ -75,28 +75,23 @@ let lastTouchX = 0;
 
 // Add touch event listeners
 cvs.addEventListener("touchstart", function (event) {
-  touchStartX = event.touches[0].clientX;
-});
+    event.preventDefault(); // Prevent scrolling/zooming on touch start
+},{passive:false});
 
-cvs.addEventListener(
-  "touchmove",
-  function (event) {
-    touchMoveX = event.touches[0].clientX;
-    let relativeX = touchX - cvs.getBoundingClientRect().left;
-    // Calculate touch movement speed
-    let touchSpeed = touchX - lastTouchX;
-
-    // Ensure the paddle moves within the canvas bounds
-    if (relativeX > 0 && relativeX < cvs.width) {
-      paddle.x += touchSpeed;
-      // Clamp paddle position within canvas bounds
-      paddle.x = Math.max(Math.min(paddle.x, cvs.width - paddle.width), 0);
-    }
-    lastTouchX = touchX;
-    event.preventDefault(); // Prevent default touch behavior (e.g., scrolling)
-  },
-  false
-);
+cvs.addEventListener("touchmove", function (event) {
+    event.preventDefault(); // Prevent scrolling/zooming on touch move
+    let touchX = event.touches[0].pageX;
+    let canvasRect = cvs.getBoundingClientRect(); // Get canvas position and size
+    let canvasScale = cvs.width / canvasRect.width; // Calculate the scale factor of the canvas
+    let relativeX = (touchX - canvasRect.left) * canvasScale; // Adjust touch X to be relative to the canvas and consider scale
+    
+    // Update paddle position based on touch, centered on the touch point
+    paddle.x = relativeX - paddle.width / 2;
+    
+    // Clamp paddle position to stay within canvas bounds
+    paddle.x = Math.max(Math.min(paddle.x, cvs.width - paddle.width), 0);
+}, { passive: false });
+   
 
 cvs.addEventListener("touchend", function (event) {
   const touchEndX = touchMoveX;
