@@ -58,7 +58,7 @@ canvas {
   left: 155px;
   cursor: pointer;
   font-size: 1.25em;
-  color: #fff;
+  color: #4609ae;
 }
 #start {
   position: absolute;
@@ -66,5 +66,5 @@ canvas {
   left: 47%;
   cursor: pointer;
   font-size: 2em;
-  color: rgb(203, 241, 53);
+  color: #4609ae;
 }

@@ -128,7 +128,7 @@ const ball = {
   x: cvs.width / 2,
   y: paddle.y - BALL_RADIUS,
   radius: BALL_RADIUS,
-  speed: 7,
+  speed: 6,
   dx: 3 * (Math.random() * 2 - 1),
   dy: -3,
 };
