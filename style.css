@@ -1,12 +1,13 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #4609AE /* Optional: Change to match your game's theme */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #4609ae; /* Optional: Change to match your game's theme */
 }
 
 /* #sound{
@@ -18,41 +19,52 @@ body, html {
     left : 15px;
 } */
 .canvas-container {
-    width: 300px;
-    height: 600px;
-    position: relative; /* Centering the canvas inside this container */
+  width: 300px;
+  height: 600px;
+  position: relative; /* Centering the canvas inside this container */
 }
 
 canvas {
-    display: block; /* Prevents any unnecessary scrollbars */
-    background-color: #fff; /* Or any color that matches your game's background */
+  display: block; /* Prevents any unnecessary scrollbars */
+  background-image: url("img/play_bellow.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
-#gameover{
-    position: absolute;
-    width : 400px;
-    height: 500px;
-    background: rgba(0,0,0,0.5);
-    display: none;
+#gameover {
+  position: absolute;
+  width: 400px;
+  height: 500px;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
 }
-#youwon{
-    width: 100px;
-    position: absolute;
-    top : 200px;
-    left : 150px;
-    display: none;
+#youwon {
+  width: 100px;
+  position: absolute;
+  top: 200px;
+  left: 150px;
+  display: none;
 }
-#youlose{
-    width:400px;
-    position: absolute;
-    top: 100px;
-    left : 0px;
-    display: none;
+#youlose {
+  width: 400px;
+  position: absolute;
+  top: 100px;
+  left: 0px;
+  display: none;
 }
-#restart{
-    position: absolute;
-    top: 310px;
-    left : 155px;
-    cursor: pointer;
-    font-size: 1.25em;
-    color : #FFF;
+#restart {
+  position: absolute;
+  top: 310px;
+  left: 155px;
+  cursor: pointer;
+  font-size: 1.25em;
+  color: #fff;
+}
+#start {
+  position: absolute;
+  top: 83%;
+  left: 47%;
+  cursor: pointer;
+  font-size: 2em;
+  color: rgb(203, 241, 53);
 }

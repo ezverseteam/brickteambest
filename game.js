@@ -3,7 +3,7 @@ const cvs = document.getElementById("breakout");
 const ctx = cvs.getContext("2d");
 
 // Fixed canvas size, no need for dynamic resizing
-const canvasWidth = 300;
+ const canvasWidth = 300;
 const canvasHeight = 600;
 
 // ADD BORDER TO CANVAS
@@ -39,7 +39,6 @@ const paddle = {
 function drawPaddle() {
   ctx.fillStyle = "#2e3548";
   ctx.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
-
   ctx.strokeStyle = "#ffcd05";
   ctx.strokeRect(paddle.x, paddle.y, paddle.width, paddle.height);
 }
@@ -134,7 +133,7 @@ const ball = {
   x: cvs.width / 2,
   y: paddle.y - BALL_RADIUS,
   radius: BALL_RADIUS,
-  speed: 6,
+  speed: 4,
   dx: 3 * (Math.random() * 2 - 1),
   dy: -3,
 };
@@ -370,7 +369,7 @@ function loop() {
     requestAnimationFrame(loop);
   }
 }
-loop();
+// loop();
 
 // SELECT SOUND ELEMENT
 // const soundElement  = document.getElementById("sound");
@@ -392,22 +391,56 @@ loop();
 //     LIFE_LOST.muted = LIFE_LOST.muted ? false : true;
 // }
 
+// GAME LOOP
+// function loop() {
+  
+//     // CLEAR THE CANVAS
+//     ctx.drawImage(BG_IMG, 0, 0);
+//     draw();
+//     update();
+//     if (!GAME_OVER) {
+//         requestAnimationFrame(loop);
+//     }
+   
+//   }
+  
+  // START GAME FUNCTION
+function startGame() {
+    
+    GAME_OVER = false;
+    SCORE = 0;
+    LIFE = 3;
+    LEVEL = 1;
+    createBricks(); // Initialize or re-initialize bricks
+    
+    loop(); 
+  }
+
+// MODIFY TO START GAME ONLY WHEN CLICK ON PLAY BUTTON
+
+ // start.addEventListener("click", startGame); // start the game
+
 // SHOW GAME OVER MESSAGE
 /* SELECT ELEMENTS */
 const gameover = document.getElementById("gameover");
 const youwin = document.getElementById("youwin");
 const youlose = document.getElementById("youlose");
 const restart = document.getElementById("restart");
+const start = document.getElementById("start");
 
 // CLICK ON PLAY AGAIN BUTTON
 restart.addEventListener("click", function () {
   location.reload(); // reload the page
 });
 
+start.addEventListener("click", function () {
+    startGame(); // start the game
+},{ once: true });
+
 // SHOW YOU WIN
 function showYouWin() {
   gameover.style.display = "block";
-  youwon.style.display = "block";
+  youwin.style.display = "block";
 }
 
 // SHOW YOU LOSE
