@@ -1,6 +1,16 @@
 *{
     font-family: "Germania One";
 }
+/* Add this to your style.css */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('img/bg-img.png');
+    background-size: cover;
+}
+
 /* #sound{
     width: 30px;
     height : 30px;
